@@ -1,0 +1,26 @@
+### rhel9-lab — 2026-10-02T16:36:10+02:00
+
+$ sudo dnf -y update
+Mise à jour des référentiels de gestion des abonnements.
+Extra Packages for Enterprise Linux 9 - x86_64  290 kB/s |  20 MB     01:11    
+Extra Packages for Enterprise Linux 9 openh264  1.7 kB/s | 2.5 kB     00:01    
+Dépendances résolues.
+Rien à faire.
+Terminé !
+
+$ sudo dnf history | head -20
+Mise à jour des référentiels de gestion des abonnements.
+ID     | Ligne de commande                                                                                                     | Date et heure    | Action(s)      | Modifié
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+     2 | -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm                                     | 2026-10-02 16:35 | Install        |    1 EE
+     1 |                                                                                                                       | 2026-10-02 15:09 | Install        |  433 EE
+
+$ sudo dnf repolist
+Mise à jour des référentiels de gestion des abonnements.
+id du dépôt                              nom du dépôt
+codeready-builder-for-rhel-9-x86_64-rpms Red Hat CodeReady Linux Builder for RHEL 9 x86_64 (RPMs)
+epel                                     Extra Packages for Enterprise Linux 9 - x86_64
+epel-cisco-openh264                      Extra Packages for Enterprise Linux 9 openh264 (From Cisco) - x86_64
+rhel-9-for-x86_64-appstream-rpms         Red Hat Enterprise Linux 9 for x86_64 - AppStream (RPMs)
+rhel-9-for-x86_64-baseos-rpms            Red Hat Enterprise Linux 9 for x86_64 - BaseOS (RPMs)
+2026-10-02T16:36:12+0200 DDEBUG Command: dnf -y update 

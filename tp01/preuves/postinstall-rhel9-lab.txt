@@ -1,0 +1,92 @@
+### rhel9-lab — 2026-10-02T16:31:43+02:00
+
+$ hostnamectl
+ Static hostname: rhel9-lab
+       Icon name: computer-vm
+         Chassis: vm 🖴
+      Machine ID: ce85f219824b436fae50ed244bef3d62
+         Boot ID: 6c73ef40f501420fb81fba7fd9c0e64c
+  Virtualization: vmware
+Operating System: Red Hat Enterprise Linux 9.8 (Plow)
+     CPE OS Name: cpe:/o:redhat:enterprise_linux:9::baseos
+          Kernel: Linux 5.14.0-687.54.1.el9_8.x86_64
+    Architecture: x86-64
+ Hardware Vendor: VMware, Inc.
+  Hardware Model: VMware20,1
+Firmware Version: VMW201.00V.24006586.B64.2406042154
+
+$ cat /etc/os-release
+NAME="Red Hat Enterprise Linux"
+VERSION="9.8 (Plow)"
+ID="rhel"
+ID_LIKE="fedora"
+VERSION_ID="9.8"
+PLATFORM_ID="platform:el9"
+PRETTY_NAME="Red Hat Enterprise Linux 9.8 (Plow)"
+ANSI_COLOR="0;31"
+LOGO="fedora-logo-icon"
+CPE_NAME="cpe:/o:redhat:enterprise_linux:9::baseos"
+HOME_URL="https://www.redhat.com/"
+DOCUMENTATION_URL="https://access.redhat.com/documentation/en-us/red_hat_enterprise_linux/9"
+BUG_REPORT_URL="https://issues.redhat.com/"
+
+REDHAT_BUGZILLA_PRODUCT="Red Hat Enterprise Linux 9"
+REDHAT_BUGZILLA_PRODUCT_VERSION=9.8
+REDHAT_SUPPORT_PRODUCT="Red Hat Enterprise Linux"
+REDHAT_SUPPORT_PRODUCT_VERSION="9.8"
+
+$ uname -r
+5.14.0-687.54.1.el9_8.x86_64
+
+$ systemctl --failed
+  UNIT LOAD ACTIVE SUB DESCRIPTION
+0 loaded units listed.
+
+$ localectl status
+System Locale: LANG=fr_FR.UTF-8
+    VC Keymap: fr-oss
+   X11 Layout: fr
+  X11 Variant: oss
+
+$ timedatectl status
+               Local time: ven. 2026-10-02 16:31:43 CEST
+           Universal time: ven. 2026-10-02 14:31:43 UTC
+                 RTC time: ven. 2026-10-02 14:31:44
+                Time zone: Europe/Paris (CEST, +0200)
+System clock synchronized: yes
+              NTP service: active
+          RTC in local TZ: no
+
+$ locale -a | grep -i fr_FR
+fr_FR
+fr_FR@euro
+fr_FR.utf8
+
+$ systemctl list-units --type=service --state=running | head -30
+  UNIT                      LOAD   ACTIVE SUB     DESCRIPTION
+  auditd.service            loaded active running Security Auditing Service
+  chronyd.service           loaded active running NTP client/server
+  crond.service             loaded active running Command Scheduler
+  dbus-broker.service       loaded active running D-Bus System Message Bus
+  firewalld.service         loaded active running firewalld - dynamic firewall daemon
+  getty@tty1.service        loaded active running Getty on tty1
+  irqbalance.service        loaded active running irqbalance daemon
+  NetworkManager.service    loaded active running Network Manager
+  polkit.service            loaded active running Authorization Manager
+  rhsmcertd.service         loaded active running Enable periodic update of entitlement certificates.
+  rsyslog.service           loaded active running System Logging Service
+  sshd.service              loaded active running OpenSSH server daemon
+  systemd-hostnamed.service loaded active running Hostname Service
+  systemd-journald.service  loaded active running Journal Service
+  systemd-localed.service   loaded active running Locale Service
+  systemd-logind.service    loaded active running User Login Management
+  systemd-timedated.service loaded active running Time & Date Service
+  systemd-udevd.service     loaded active running Rule-based Manager for Device Events and Files
+  user@1000.service         loaded active running User Manager for UID 1000
+  vgauthd.service           loaded active running VGAuth Service for open-vm-tools
+  vmtoolsd.service          loaded active running Service for virtual machines hosted on VMware
+
+LOAD   = Reflects whether the unit definition was properly loaded.
+ACTIVE = The high-level unit activation state, i.e. generalization of SUB.
+SUB    = The low-level unit activation state, values depend on unit type.
+21 loaded units listed.
