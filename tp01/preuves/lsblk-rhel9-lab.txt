@@ -1,0 +1,49 @@
+### rhel9-lab — 2026-10-02T16:13:44+02:00
+
+$ lsblk -f
+NAME               FSTYPE      FSVER    LABEL UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda                                                                                                 
+├─sda1             vfat        FAT32          C9E1-1896                               591,2M     1% /boot/efi
+├─sda2             xfs                        4de8f2a2-0045-41e7-8e12-76b4b6f20325    713,5M    26% /boot
+└─sda3             LVM2_member LVM2 001       IZsVTn-oHqE-nBfb-jm0H-rmgz-hYFd-KGVJjN                
+  ├─vg_sys-lv_root xfs                        433d366f-6fe8-49e8-ada5-1d276aee3d48      6,3G    20% /
+  ├─vg_sys-lv_swap swap        1              b5231bfa-3ecb-4c45-be2b-a89cc69b7b57                  [SWAP]
+  ├─vg_sys-lv_home xfs                        27a29663-e177-4844-96ba-39bcbb595cc9      1,9G     2% /home
+  ├─vg_sys-lv_log  xfs                        37d54d25-b49b-4988-b3fa-82f7155f8e0f      1,9G     3% /var/log
+  └─vg_sys-lv_var  xfs                        383d7ebe-a724-4423-8fa1-866308604d83      3,8G     3% /var
+sr0                                                                                                 
+
+$ df -hT
+Sys. de fichiers           Type     Taille Utilisé Dispo Uti% Monté sur
+devtmpfs                   devtmpfs   815M       0  815M   0% /dev
+tmpfs                      tmpfs      838M       0  838M   0% /dev/shm
+tmpfs                      tmpfs      335M    5,0M  330M   2% /run
+efivarfs                   efivarfs   256K     57K  195K  23% /sys/firmware/efi/efivars
+/dev/mapper/vg_sys-lv_root xfs        8,0G    1,7G  6,4G  21% /
+/dev/sda2                  xfs        960M    247M  714M  26% /boot
+/dev/mapper/vg_sys-lv_home xfs        2,0G     47M  1,9G   3% /home
+/dev/sda1                  vfat       599M    7,7M  592M   2% /boot/efi
+/dev/mapper/vg_sys-lv_var  xfs        4,0G    127M  3,9G   4% /var
+/dev/mapper/vg_sys-lv_log  xfs        2,0G     59M  1,9G   3% /var/log
+tmpfs                      tmpfs      168M       0  168M   0% /run/user/1000
+
+$ swapon --show
+NAME      TYPE      SIZE USED PRIO
+/dev/dm-1 partition   2G   0B   -2
+
+$ findmnt --target /var/log
+TARGET   SOURCE                    FSTYPE OPTIONS
+/var/log /dev/mapper/vg_sys-lv_log xfs    rw,relatime,seclabel,attr2,inode64,logbufs=8,logbsize=32k,noquota
+
+$ sudo vgs
+  VG     #PV #LV #SN Attr   VSize  VFree 
+  vg_sys   1   5   0 wz--n- 28,41g 10,41g
+
+$ sudo lvs
+  LV      VG     Attr       LSize Pool Origin Data%  Meta%  Move Log Cpy%Sync Convert
+  lv_home vg_sys -wi-ao---- 2,00g                                                    
+  lv_log  vg_sys -wi-ao---- 2,00g                                                    
+  lv_root vg_sys -wi-ao---- 8,00g                                                    
+  lv_swap vg_sys -wi-ao---- 2,00g                                                    
+  lv_var  vg_sys -wi-ao---- 4,00g                                                    
+
