@@ -1,0 +1,44 @@
+ubuntu@ubuntu24-lab:~$ lsblk -f
+NAME FSTYPE FSVER LABEL                           UUID                                   FSAVAIL FSUSE% MOUNTPOINTS
+sda
+├─sda1
+│
+├─sda2
+│    ext4   1.0                                   96f9b28a-1a66-4fbc-85b2-87bb42511954    803.2M    11% /boot
+└─sda3
+     LVM2_m LVM2                                  JHYSF6-Eflm-N3uP-CRXR-vutb-fDFC-e9HHTE
+  ├─vg_sys-lv_root
+  │  ext4   1.0                                   dad54c1b-b3aa-45a6-9172-80cd71f22124      5.5G    24% /
+  ├─vg_sys-lv_var
+  │  ext4   1.0                                   8c8f1513-fd69-41c9-b441-e679224783c5      3.3G     9% /var
+  ├─vg_sys-lv_home
+  │  ext4   1.0                                   954d51a9-d677-46bf-901e-a613cb986353      1.8G     0% /home
+  ├─vg_sys-lv_swap
+  │  swap   1                                     38b3f7a0-cbc6-4284-a6a9-a14efca28d8e                  [SWAP]
+  └─vg_sys-lv_log
+     ext4   1.0                                   094c9d34-b110-432f-aa54-f2d29775661e      1.8G     1% /var/log
+sr0  iso966 Jolie Ubuntu-Server 24.04.5 LTS amd64 2026-09-09-09-12-22-00
+
+ubuntu@ubuntu24-lab:~$ df -hT
+Filesystem                 Type   Size  Used Avail Use% Mounted on
+tmpfs                      tmpfs  197M  760K  197M   1% /run
+/dev/mapper/vg_sys-lv_root ext4   7.8G  1.9G  5.6G  25% /
+tmpfs                      tmpfs  984M     0  984M   0% /dev/shm
+tmpfs                      tmpfs  5.0M     0  5.0M   0% /run/lock
+/dev/mapper/vg_sys-lv_home ext4   2.0G   48K  1.8G   1% /home
+/dev/mapper/vg_sys-lv_var  ext4   3.9G  349M  3.4G  10% /var
+/dev/mapper/vg_sys-lv_log  ext4   2.0G   18M  1.8G   1% /var/log
+/dev/sda2                  ext4   974M  103M  804M  12% /boot
+tmpfs                      tmpfs  197M   12K  197M   1% /run/user/1000
+tmpfs                      tmpfs  512M     0  512M   0% /tmp
+
+
+ubuntu@ubuntu24-lab:~$ swapon --show
+NAME      TYPE      SIZE USED PRIO
+/dev/dm-3 partition   2G   0B   -2
+
+
+ubuntu@ubuntu24-lab:~$ findmnt --target /var/log
+TARGET   SOURCE                    FSTYPE OPTIONS
+/var/log /dev/mapper/vg_sys-lv_log ext4   rw,relatime
+ubuntu@ubuntu24-lab:~$
