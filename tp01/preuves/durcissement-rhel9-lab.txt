@@ -1,0 +1,103 @@
+### rhel9-lab — 2026-10-02T16:43:54+02:00
+
+$ sudo passwd -S root
+root LK 1969-12-31 0 99999 7 -1 (Mot de passe verrouillé.)
+
+$ id abou
+uid=1000(abou) gid=1000(abou) groupes=1000(abou),10(wheel)
+$ id tommy
+uid=1001(tommy) gid=1001(tommy) groupes=1001(tommy),10(wheel)
+$ id jeremy
+uid=1002(jeremy) gid=1002(jeremy) groupes=1002(jeremy),10(wheel)
+$ id thierry
+uid=1003(thierry) gid=1003(thierry) groupes=1003(thierry),10(wheel)
+
+$ getent group wheel
+wheel:x:10:abou,jeremy,thierry,tommy
+
+$ sudo chage -l tommy
+Last password change					: oct. 02, 2026
+Password expires					: never
+Password inactive					: never
+Account expires						: never
+Minimum number of days between password change		: 0
+Maximum number of days between password change		: 99999
+Number of days of warning before password expires	: 7
+
+### D.4 constat — 2026-10-02T16:57:15+02:00
+$ sudo sshd -T | grep -Ei "permitrootlogin|passwordauthentication"
+permitrootlogin without-password
+passwordauthentication yes
+
+$ ls /etc/ssh/sshd_config.d/
+ls: impossible d'ouvrir le répertoire '/etc/ssh/sshd_config.d/': Permission non accordée
+
+### D.4 application — 2026-10-02T16:58:52+02:00
+$ sudo ls -l /etc/ssh/sshd_config.d/
+total 4
+-rw-------. 1 root root 719 21 sept. 18:36 50-redhat.conf
+# TP1 D.4 - 2026-10-02 - abou
+# Interdit toute connexion SSH directe du compte root
+PermitRootLogin no
+$ sudo sshd -t
+syntaxe-ok
+reload-ok
+$ sudo sshd -T | grep -Ei "permitrootlogin|passwordauthentication"
+permitrootlogin no
+passwordauthentication yes
+
+$ sudo journalctl -u sshd --since "-10 min" | grep -i root
+oct. 02 17:00:55 rhel9-lab sshd-session[3049]: Connection reset by authenticating user root 192.168.59.1 port 53209 [preauth]
+oct. 02 17:01:03 rhel9-lab unix_chkpwd[3070]: password check failed for user (root)
+oct. 02 17:01:03 rhel9-lab sshd-session[3051]: pam_unix(sshd:auth): authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.59.1  user=root
+oct. 02 17:01:05 rhel9-lab sshd-session[3051]: Failed password for root from 192.168.59.1 port 53210 ssh2
+oct. 02 17:01:15 rhel9-lab unix_chkpwd[3071]: password check failed for user (root)
+oct. 02 17:01:17 rhel9-lab sshd-session[3051]: Failed password for root from 192.168.59.1 port 53210 ssh2
+oct. 02 17:01:19 rhel9-lab sshd-session[3051]: Connection reset by authenticating user root 192.168.59.1 port 53210 [preauth]
+oct. 02 17:01:19 rhel9-lab sshd-session[3051]: PAM 1 more authentication failure; logname= uid=0 euid=0 tty=ssh ruser= rhost=192.168.59.1  user=root
+
+### D.5 pare-feu — 2026-10-02T17:03:07+02:00
+$ sudo firewall-cmd --get-active-zones
+public
+  interfaces: ens160 ens192
+$ sudo firewall-cmd --permanent --add-service=ssh
+Warning: ALREADY_ENABLED: ssh
+success
+$ sudo firewall-cmd --reload
+success
+$ sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens160 ens192
+  sources: 
+  services: cockpit dhcpv6-client ssh
+  ports: 
+  protocols: 
+  forward: yes
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
+
+### D.5 réduction au strict nécessaire — 2026-10-02T17:03:35+02:00
+$ sudo firewall-cmd --permanent --remove-service=cockpit --remove-service=dhcpv6-client
+success
+$ sudo firewall-cmd --reload
+success
+$ sudo firewall-cmd --list-all
+public (active)
+  target: default
+  icmp-block-inversion: no
+  interfaces: ens160 ens192
+  sources: 
+  services: ssh
+  ports: 
+  protocols: 
+  forward: yes
+  masquerade: no
+  forward-ports: 
+  source-ports: 
+  icmp-blocks: 
+  rich rules: 
