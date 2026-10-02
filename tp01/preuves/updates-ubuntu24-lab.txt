@@ -1,0 +1,25 @@
+ubuntu@ubuntu24-lab:~$ apt list --upgradable
+Listing... Done
+
+
+ubuntu@ubuntu24-lab:~$ tail -20 /var/log/apt/history.log
+Commandline: apt-get --quiet --assume-yes --option=Dpkg::options::=--force-unsafe-io --option=Dpkg::Options::=--force-confold install openssh-server
+Install: libwrap0:amd64 (7.6.q-33, automatic), ssh-import-id:amd64 (5.11-0ubuntu2.24.04.1, automatic), openssh-server:amd64 (1:9.6p1-3ubuntu13.19), wget:amd64 (1.21.4-1ubuntu4.5, automatic), openssh-sftp-server:amd64 (1:9.6p1-3ubuntu13.19, automatic), ncurses-term:amd64 (6.4+20240113-1ubuntu2.2, automatic)
+End-Date: 2026-10-02  15:13:33
+
+Start-Date: 2026-10-02  15:13:45
+Commandline: /usr/bin/unattended-upgrades -v
+Upgrade: libpolkit-agent-1-0:amd64 (124-2ubuntu1.24.04.3, 124-2ubuntu1.24.04.4), libglib2.0-bin:amd64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), perl:amd64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), polkitd:amd64 (124-2ubuntu1.24.04.3, 124-2ubuntu1.24.04.4), gir1.2-glib-2.0:amd64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), libexpat1:amd64 (2.6.1-2ubuntu0.4, 2.6.1-2ubuntu0.6), libisns0t64:amd64 (0.101-0.3build3, 0.101-0.3ubuntu0.1), python3-requests:amd64 (2.31.0+dfsg-1ubuntu1.1, 2.31.0+dfsg-1ubuntu1.2), dracut-install:amd64 (060+5-1ubuntu3.3, 060+5-1ubuntu3.4), libxml2:amd64 (2.9.14+dfsg-1.3ubuntu3.8, 2.9.14+dfsg-1.3ubuntu3.9), libglib2.0-data:amd64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9), libcurl3t64-gnutls:amd64 (8.5.0-2ubuntu10.13, 8.5.0-2ubuntu10.15), libpolkit-gobject-1-0:amd64 (124-2ubuntu1.24.04.3, 124-2ubuntu1.24.04.4), libsqlite3-0:amd64 (3.45.1-1ubuntu2.7, 3.45.1-1ubuntu2.8), libcurl4t64:amd64 (8.5.0-2ubuntu10.13, 8.5.0-2ubuntu10.15), python3-jwt:amd64 (2.7.0-1ubuntu0.1, 2.7.0-1ubuntu0.2), perl-base:amd64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), sudo:amd64 (1.9.15p5-3ubuntu5.24.04.2, 1.9.15p5-3ubuntu5.24.04.3), libssl3t64:amd64 (3.0.13-0ubuntu3.15, 3.0.13-0ubuntu3.16), curl:amd64 (8.5.0-2ubuntu10.13, 8.5.0-2ubuntu10.15), perl-modules-5.38:amd64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), libperl5.38t64:amd64 (5.38.2-3.2ubuntu0.4, 5.38.2-3.2ubuntu0.6), openssl:amd64 (3.0.13-0ubuntu3.15, 3.0.13-0ubuntu3.16), libglib2.0-0t64:amd64 (2.80.0-6ubuntu3.8, 2.80.0-6ubuntu3.9)
+End-Date: 2026-10-02  15:13:47
+
+Start-Date: 2026-10-02  15:39:42
+Commandline: apt install nano
+Requested-By: ubuntu (1000)
+Install: nano:amd64 (7.2-2ubuntu0.2)
+End-Date: 2026-10-02  15:39:42
+
+Start-Date: 2026-10-02  18:21:10
+Commandline: apt -y full-upgrade
+Requested-By: ubuntu (1000)
+Upgrade: netplan-generator:amd64 (1.1.2-8ubuntu1~24.04.2, 1.1.2-8ubuntu1~24.04.3), krb5-locales:amd64 (1.20.1-6ubuntu2.8, 1.20.1-6ubuntu2.10), libgssapi-krb5-2:amd64 (1.20.1-6ubuntu2.8, 1.20.1-6ubuntu2.10), libaudit-common:amd64 (1:3.1.2-2.1build1.1, 1:3.1.2-2.1ubuntu0.1), python3-netplan:amd64 (1.1.2-8ubuntu1~24.04.2, 1.1.2-8ubuntu1~24.04.3), apparmor:amd64 (4.0.1really4.0.1-0ubuntu0.24.04.7, 4.0.1really4.0.1-0ubuntu0.24.04.8), libapparmor1:amd64 (4.0.1really4.0.1-0ubuntu0.24.04.7, 4.0.1really4.0.1-0ubuntu0.24.04.8), libkrb5support0:amd64 (1.20.1-6ubuntu2.8, 1.20.1-6ubuntu2.10), libkrb5-3:amd64 (1.20.1-6ubuntu2.8, 1.20.1-6ubuntu2.10), libk5crypto3:amd64 (1.20.1-6ubuntu2.8, 1.20.1-6ubuntu2.10), netplan.io:amd64 (1.1.2-8ubuntu1~24.04.2, 1.1.2-8ubuntu1~24.04.3), libaudit1:amd64 (1:3.1.2-2.1build1.1, 1:3.1.2-2.1ubuntu0.1), libnetplan1:amd64 (1.1.2-8ubuntu1~24.04.2, 1.1.2-8ubuntu1~24.04.3)
+End-Date: 2026-10-02  18:21:13
