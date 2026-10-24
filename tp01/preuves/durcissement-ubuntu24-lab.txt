@@ -1,0 +1,31 @@
+ubuntu@ubuntu24-lab:~$ sudo passwd -S root
+root L 2026-09-09 0 99999 7 -1
+
+ubuntu@ubuntu24-lab:~$ id abou
+uid=1001(abou) gid=1001(abou) groups=1001(abou),27(sudo),100(users)
+ubuntu@ubuntu24-lab:~$ id tommy
+uid=1002(tommy) gid=1002(tommy) groups=1002(tommy),27(sudo),100(users)
+ubuntu@ubuntu24-lab:~$ id jeremi
+uid=1004(jeremi) gid=1004(jeremi) groups=1004(jeremi),27(sudo),100(users)
+ubuntu@ubuntu24-lab:~$ id thierry
+uid=1003(thierry) gid=1003(thierry) groups=1003(thierry),27(sudo),100(users)
+
+thierry@ubuntu24-lab:~$ sudo -n true && echo delegation-ok
+delegation-ok
+
+ssh -o BatchMode=yes root@192.168.2.55 true
+root@192.168.2.55: Permission denied (publickey,password).
+
+ubuntu@ubuntu24-lab:~$ sudo ufw status verbose
+[sudo] password for ubuntu:
+Status: active
+Logging: on (low)
+Default: deny (incoming), allow (outgoing), disabled (routed)
+New profiles: skip
+
+To                         Action      From
+--                         ------      ----
+22/tcp (OpenSSH)           ALLOW IN    Anywhere
+22/tcp (OpenSSH (v6))      ALLOW IN    Anywhere (v6)
+
+ubuntu@ubuntu24-lab:~$
